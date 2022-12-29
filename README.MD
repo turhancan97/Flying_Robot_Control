@@ -49,20 +49,14 @@ Finally, the script defines several variables, such as the `mass` and `damping c
 
 The figures and animation below are generated for the flying object that has xd = 0, yd = 0, ttad = 0, ud = 1, vd = 0, rd = 0 desired trajectory to track and the object's state starts from xd = 1, yd = 1, ttad = 1, ud = 1, vd = 1, rd = 1.
 
-<p align="left">
-<img src="docs/images/measurement_by_time.png" width='500' height='300' alt="drawing"/>
-</a>
-<figcaption> Obtained Measurement by Time </figcaption>
-</p>
+<p align="center"><img src="docs/images/measurement_by_time.png" width='1000' height='500' alt="drawing"/></a>
+<em>Obtained Measurement by Time </em></p>
 
+<p align="center"><img src="docs/images/trajectories.png" width='1000' height='500' alt="drawing"/></a>
+<em>Obtained Trajectories</em></p>
 
-<p align="left"><img src="docs/images/trajectories.png" width='500' height='300' alt="drawing"/></a>
-<figcaption> Obtained Trajectories</figcaption></p>
-
-
-<p align="left"><img src="docs/images/animation.gif" width='500' height='300' alt="drawing"/></a>
-<figcaption>Animation</figcaption></p>
-
+<p align="center"><img src="docs/images/animation.gif" width='1000' height='500' alt="drawing"/></a>
+<em>Animation</em></p>
 
 The `controller` function is responsible for calculating the control inputs for the object based on its current state and the desired trajectory. The control inputs are used to drive the object towards the desired trajectory.
 
