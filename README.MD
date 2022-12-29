@@ -50,7 +50,7 @@ Finally, the script defines several variables, such as the `mass` and `damping c
 The figures and animation below are generated for the flying object that has xd = 0, yd = 0, ttad = 0, ud = 1, vd = 0, rd = 0 desired trajectory to track and the object's state starts from xd = 1, yd = 1, ttad = 1, ud = 1, vd = 1, rd = 1.
 
 <p align="center"><img src="docs/images/measurement_by_time.png" width='500' height='300' alt="drawing"/></a>
-<em> Obtained Measurement by Time </em></p>
+<figcaption> Obtained Measurement by Time </figcaption></p>
 
 
 <p align="center"><img src="docs/images/trajectories.png" width='500' height='300' alt="drawing"/></a>
