@@ -1,7 +1,5 @@
 # Simulation of a Dynamic Flying Object
 
----
-
 * **Author:** [Turhan Can Kargın](https://github.com/turhancan97)
 * **Topic:** Control of Flying Robots Laboratory Assignments
 
