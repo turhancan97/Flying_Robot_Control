@@ -1,6 +1,19 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import functools
+import random
+############----------------###############
+## Adjust the Figure Size at the beginning ##
+plt.style.use('ggplot') # ggplot sytle plots
+plt.rcParams["figure.figsize"] = (20,8)
+plt.rcParams["xtick.labelsize"] = 7
+plt.rcParams["ytick.labelsize"] = 10
+plt.rcParams['font.family'] = 'monospace'
+plt.rcParams['figure.constrained_layout.use'] = True
+plt.rcParams["figure.titlesize"] = 'x-large'
+color_list = ['b','g','r','c','m','y','k']
+## plt.rcParams.keys() ## To see the plot adjustment parameters
+############----------------###############
 
 MAT = np.array
 S = lambda a: MAT([[0, -a[2][0], a[1][0]],[a[2][0], 0, -a[0][0]],[-a[1][0], a[0][0], 0]]) # skew-symmetric matrix
@@ -319,8 +332,6 @@ def flying_robot(t,xi_array):
     return np.ndarray.tolist(dxi.T[0])
         
 def tree_dim_plot(x,y,z,xd,yd,zd):
-    ## write your code here
-    fig = plt.figure()
     
     if traj_val == 1:
         # desired position in 3 dimmensions
@@ -329,143 +340,127 @@ def tree_dim_plot(x,y,z,xd,yd,zd):
         ax.scatter(1, 1.05, 0.94,label ="Desired Point that Robot Should Reach") # Data for three-dimensional 
         ax.plot3D(x, y, z, "red",label = "Actual Trajectory of Flying Object") # Data for three-dimensional
         ax.legend()
-        ax.set_xlabel('X Label')
-        ax.set_ylabel('Y Label')
-        ax.set_zlabel('Z Label')
+        ax.set_xlabel('X Position [m]')
+        ax.set_ylabel('Y Position [m]')
+        ax.set_zlabel('Z Position [m]')
         plt.show()
     else:
         # desired position in 3 dimmensions
         ax = plt.axes(projection="3d")
         # actual position in 3 dimmensions
-        ax.plot3D(xd, yd, zd, "black",label ="desired trajectory") # Data for three-dimensional 
-        ax.plot3D(x, y, z, "red",label = "actual trajectory") # Data for three-dimensional
+        ax.plot3D(xd, yd, zd, "black",label ="Desired Trajectory") # Data for three-dimensional 
+        ax.plot3D(x, y, z, "red",label = "Actual Trajectory") # Data for three-dimensional
         ax.legend()
-        ax.set_xlabel('X Label')
-        ax.set_ylabel('Y Label')
-        ax.set_zlabel('Z Label')
+        ax.set_xlabel('X Position [m]')
+        ax.set_ylabel('Y Position [m]')
+        ax.set_zlabel('Z Position [m]')
         plt.show()
     
 def two_dim_plot(x,y,z,xd,yd,zd):
+    '''Plot the 2D Trajectories.'''
+
     if traj_val == 1:
-        plt.figure()
-        plt.plot(x, y,"red",label='X-Y')
-        plt.scatter(1, 1.05,label="Desired Point")
-        plt.xlabel('X')
-        plt.ylabel('Y')
-        plt.legend(loc='best')
-        plt.show()
-        ####################
-        plt.figure()
-        plt.plot(y, z,"red", label='Y-Z Actual')
-        plt.scatter(1.05, 0.94,label="Desired Point")
-        plt.xlabel('Y')
-        plt.ylabel('Z')
-        plt.legend(loc='best')
-        plt.show()
-        ###################
-        plt.figure()
-        plt.plot(x, z,"red",label='X-Z')
-        plt.scatter(1,0.94,label="Desired Point")
-        plt.xlabel('X')
-        plt.ylabel('Z')
-        plt.legend(loc='best')
+        nrows = 3
+        ncols = 1
+        fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+        axs[0].plot(x, y,random.choice(color_list),label='X-Y Actual')
+        axs[0].scatter(1, 1.05,label="Desired Point")
+        axs[0].legend(loc='best')
+        axs[1].plot(y,z,random.choice(color_list),label='Y-Z Actual')
+        axs[1].scatter(1, 1.05,label="Desired Point")
+        axs[1].legend(loc='best')
+        axs[2].plot(x,z,random.choice(color_list),label='X-Z Actual')
+        axs[2].scatter(1, 1.05,label="Desired Point")
+        axs[2].legend(loc='best')
+        fig.supxlabel('Position [m]')
+        fig.supylabel('Position [m]')
         plt.show()
     
-    else:      
-        plt.figure()
-        plt.plot(x, y, label='X-Y')
-        plt.plot(xd,yd,'--',label="X-Y Desired")
-        plt.xlabel('X')
-        plt.ylabel('Y')
-        plt.legend(loc='best')
-        plt.show()
-        ####################
-        plt.figure()
-        plt.plot(y, z, label='Y-Z Actual')
-        plt.plot(yd,zd,'--',label="Y-Z Desired")
-        plt.xlabel('Y')
-        plt.ylabel('Z')
-        plt.legend(loc='best')
-        plt.show()
-        ###################
-        plt.figure()
-        plt.plot(x, z, label='X-Z')
-        plt.plot(xd,zd,'--',label="X-Z Desired")
-        plt.xlabel('X')
-        plt.ylabel('Z')
-        plt.legend(loc='best')
+    else:
+        nrows = 1
+        ncols = 3
+        fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+        axs[0].plot(x, y,random.choice(color_list),label='X-Y Actual')
+        axs[0].plot(xd,yd,'--',label="X-Y Desired")
+        axs[0].legend(loc='best')
+        axs[1].plot(y,z,random.choice(color_list),label='Y-Z Actual')
+        axs[1].plot(yd,zd,'--',label="Y-Z Desired")
+        axs[1].legend(loc='best')
+        axs[2].plot(x,z,random.choice(color_list),label='X-Z Actual')
+        axs[2].plot(xd,zd,'--',label="X-Z Desired")
+        axs[2].legend(loc='best')
+        fig.supxlabel('Position [m]')
+        fig.supylabel('Position [m]')
         plt.show()
     
 def one_dim_plot_t(t,x,y,z,xd,yd,zd):
-    plt.figure()
-    plt.plot(t, z,label='Z')
-    plt.plot(t,zd,'--',label="Zd")
-    plt.legend(loc='best')
-    plt.show()
-    ####################
-    plt.figure()
-    plt.plot(t, y, label='Y')
-    plt.plot(t, yd,'--', label='Yd')
-    plt.legend(loc='best')
-    plt.show()
-    ###################
-    plt.figure()
-    plt.plot(t, x, label='X')
-    plt.plot(t, xd,'--', label='Xd')
-    plt.legend(loc='best')
+    nrows = 1
+    ncols = 3
+    fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+    axs[0].plot(t, x,random.choice(color_list),label='X Actual')
+    axs[0].plot(t,xd,'--',label="X Desired")
+    axs[0].legend(loc='best')
+    axs[1].plot(t,y,random.choice(color_list),label='Y Actual')
+    axs[1].plot(t,yd,'--',label="Y Desired")
+    axs[1].legend(loc='best')
+    axs[2].plot(t,z,random.choice(color_list),label='Z Actual')
+    axs[2].plot(t,zd,'--',label="Z Desired")
+    axs[2].legend(loc='best')
+    fig.supxlabel('Time [s]')
+    fig.supylabel('Position [m]')
     plt.show()
     
 def plot_vel(t,w,v,u):
-    plt.figure()
-    plt.plot(t, w, label='(W)-Linear Velocity in Z-Axis')
-    plt.legend(loc='best')
+    nrows = 1
+    ncols = 3
+    fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+    axs[0].plot(t, u,random.choice(color_list),label='(U) - Linear Velocity in X-Axis')
+    axs[0].legend(loc='best')
+    axs[1].plot(t,v,random.choice(color_list),label='(V) - Linear Velocity in Y-Axis')
+    axs[1].legend(loc='best')
+    axs[2].plot(t,w,random.choice(color_list),label='(W) - Linear Velocity in Z-Axis')
+    axs[2].legend(loc='best')
+    fig.supxlabel('Time [s]')
+    fig.supylabel('Velocity [m/s]')
     plt.show()
-    ####################
-    plt.figure()
-    plt.plot(t, v, label='(V)-Linear Velocity in Y-Axis')
-    plt.legend(loc='best')
-    plt.show()
-    ###################
-    plt.figure()
-    plt.plot(t, u,label='(U)-Linear Velocity in X-Axis')
-    plt.legend(loc='best')
-    plt.show()
-    
     
 def error_plot(t,x,y,z,xd,yd,zd):
-    ## Error of Positions
-    plt.figure()
-    plt.plot(t, zd-z,label='Z Position Error')
-    plt.legend(loc='best')
-    plt.show()
-    ####################
-    plt.figure()
-    plt.plot(t, yd-y, label='Y Position Error')
-    plt.legend(loc='best')
-    plt.show()
-    ###################
-    plt.figure()
-    plt.plot(t, xd-x, label='X Position Error')
-    plt.legend(loc='best')
+    nrows = 1
+    ncols = 3
+    fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+    axs[0].plot(t, xd-x,random.choice(color_list),label='X Position Error')
+    axs[0].legend(loc='best')
+    axs[1].plot(t, yd-y,random.choice(color_list),label='Y Position Error')
+    axs[1].legend(loc='best')
+    axs[2].plot(t, zd-z,random.choice(color_list),label='Z Position Error')
+    axs[2].legend(loc='best')
+    fig.supxlabel('Time [s]')
+    fig.supylabel('Error [m]')
     plt.show()
 
 def contr_ex_plot(t,res_tau,res_exF):
-    fig1 = plt.figure()
-    ax1 = fig1.add_subplot(3,2,1)
-    ax1.plot(t,res_tau[0],"red",label='Control Signal X - taux')
-    ax1.legend(loc='best')
-    ax1 = fig1.add_subplot(3,2,2)
-    ax1.plot(t,res_exF[0],"red",label='External Force on X')
-    ax1.legend(loc='best')
-    ax1 = fig1.add_subplot(3,2,3)
-    ax1.plot(t,res_tau[1],"blue",label='Control Signal Y - tauy')
-    ax1.legend(loc='best')
-    ax1 = fig1.add_subplot(3,2,4)
-    ax1.plot(t,res_exF[1],"blue",label='External Force on Y')
-    ax1.legend(loc='best')
-    ax1 = fig1.add_subplot(3,2,5)
-    ax1.plot(t,res_tau[2],"green",label='Control Signal Z - tauz')
-    ax1.legend(loc='best')
-    ax1 = fig1.add_subplot(3,2,6)
-    ax1.plot(t,res_exF[2],"green",label='External Force on Z')
-    ax1.legend(loc='best')
+    nrows = 3
+    ncols = 2
+    fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+
+    axs[0,0].plot(t,res_tau[0],random.choice(color_list),label='Control Signal X - taux')
+    axs[0,0].legend(loc='best')
+
+    axs[0,1].plot(t,res_exF[0],random.choice(color_list),label='External Force on X')
+    axs[0,1].legend(loc='best')
+
+    axs[1,0].plot(t,res_tau[1],random.choice(color_list),label='Control Signal Y - tauy')
+    axs[1,0].legend(loc='best')
+
+    axs[1,1].plot(t,res_exF[1],random.choice(color_list),label='External Force on Y')
+    axs[1,1].legend(loc='best')
+
+    axs[2,0].plot(t,res_tau[2],random.choice(color_list),label='Control Signal Z - tauz')
+    axs[2,0].legend(loc='best')
+
+    axs[2,1].plot(t,res_exF[2],random.choice(color_list),label='External Force on Z')
+    axs[2,1].legend(loc='best')
+
+    fig.supxlabel('Time [s]')
+    fig.supylabel('Control Signals and External Forces')
+    plt.show()

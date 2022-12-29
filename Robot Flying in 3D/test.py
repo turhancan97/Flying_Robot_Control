@@ -5,7 +5,6 @@ import functools
 MAT = np.array
 rot_deg = 0 # Rotation Angle on Z axis
 
-
 # finish time of the simulation
 tend = 100
 
