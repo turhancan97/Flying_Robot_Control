@@ -47,13 +47,13 @@ iM = np.linalg.inv(M)
 # trjectory = 2 -> line Tracking
 
 # Tracking
-#Kp = [15,24,250] #-> Tracking
-#Kd = [-5,5,0] # -> Tracking
+Kp = [15,24,250] #-> Tracking
+Kd = [-5,5,0] # -> Tracking
 
 # Stabilization
-Kp = [25,200,1500] # -> stabilization #Kp = [25,200,35]
-Kd = [30,150,500] # -> stabilization #Kd = [30,150,32.7]
-traj_val = 1
+# Kp = [25,200,1500] # -> stabilization #Kp = [25,200,35]
+# Kd = [30,150,500] # -> stabilization #Kd = [30,150,32.7]
+traj_val = 0
 cont_val = 2
 
 

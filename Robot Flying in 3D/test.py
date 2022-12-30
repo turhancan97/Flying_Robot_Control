@@ -2,6 +2,9 @@ from Simulation import log_results,C,controller,trajectory,external_forces,flyin
 import numpy as np
 from scipy.integrate import solve_ivp
 import functools
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation # make animation
+
 MAT = np.array
 rot_deg = 0 # Rotation Angle on Z axis
 
@@ -56,3 +59,23 @@ one_dim_plot_t(t,x,y,z,xd,yd,zd)
 plot_vel(t,w,v,u)
 error_plot(t,x,y,z,xd,yd,zd)
 contr_ex_plot(t,res_tau,res_exF)
+
+def update(t):
+    ax.cla()
+
+    ax.plot(x[:t], y[:t], z[:t],label = "Actual Trajectory of Flying Object")
+    ax.plot(xd[:t], yd[:t], zd[:t],label = "Desired Trajectory of Flying Object")
+    ax.legend(fontsize=5)
+    ax.set_xlim(-5, 5)
+    ax.set_ylim(-10, 10)
+    ax.set_zlim(-100, 100)
+    ax.set_xlabel('X Position [m]',fontsize=5)
+    ax.set_ylabel('Y Position [m]',fontsize=5)
+    ax.set_zlabel('Z Position [m]',fontsize=5)
+
+fig = plt.figure(dpi=150)
+ax = fig.add_subplot(projection='3d')
+
+ani = FuncAnimation(fig = fig, func = update, frames=np.shape(t)[0], interval = 100)
+
+plt.show()
