@@ -1,7 +1,6 @@
-from Simulation import log_results,C,controller,trajectory,external_forces,flying_robot,tree_dim_plot,two_dim_plot,one_dim_plot_t,plot_vel,error_plot,contr_ex_plot
+from Simulation import controller,trajectory,external_forces,flying_robot,tree_dim_plot,two_dim_plot,one_dim_plot_t,plot_vel,error_plot,contr_ex_plot
 import numpy as np
 from scipy.integrate import solve_ivp
-import functools
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation # make animation
 
