@@ -169,7 +169,7 @@ Obtained result are as follow:
 <p align="center"><img src="docs/images/line_control_signal.png" width='1000' height='500' alt="drawing"/></a>
 <em>Line Trajectory External Forces and Control Signals</em></p>
 
-<p align="center"><img src="docs/images/animation_helix.gif" width='750' height='350' alt="drawing"/></a>
+<p align="center"><img src="docs/images/animation_line.gif" width='750' height='350' alt="drawing"/></a>
 <em>Animation</em></p>
 
 ### Stabilization
