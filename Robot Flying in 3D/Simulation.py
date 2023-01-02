@@ -36,6 +36,7 @@ pav = pag
 # mass matrix and its inversion
 M = np.concatenate((np.concatenate((m*I,-m*S(pag)),axis=1),np.concatenate((m*S(pag),I),axis=1)),axis=0)
 iM = np.linalg.inv(M)
+
 # simulation(controller,trajectory,Kp,Kd)
 
 # controller = 0 -> No Controller
@@ -43,16 +44,21 @@ iM = np.linalg.inv(M)
 # controller = 2 -> PD Controller
 
 # trjectory = 0 -> Helix trajectory tracking
-# trjectory = 1 -> Standing on (1,1,1) (stabilization)
+# trjectory = 1 -> Standing on (10,10,10) (stabilization)
 # trjectory = 2 -> line Tracking
 
-# Tracking
+# Tracking Helix trajectory
 Kp = [15,24,250] #-> Tracking
 Kd = [-5,5,0] # -> Tracking
 
+# Tracking line trajectory
+# Kp = [15,24,250] #-> Tracking
+# Kd = [5,5,0] # -> Tracking
+
+
 # Stabilization
-# Kp = [25,200,1500] # -> stabilization #Kp = [25,200,35]
-# Kd = [30,150,500] # -> stabilization #Kd = [30,150,32.7]
+# Kp = [25,200,2000] # -> stabilization #Kp = [25,200,35]
+# Kd = [30,150,750] # -> stabilization #Kd = [30,150,32.7]
 traj_val = 0
 cont_val = 2
 
@@ -232,16 +238,16 @@ def trajectory(t):
     
     
     if traj_val == 1:
-        #Standing on (1,1,1) - stabilization
-        xd = 1
-        yd = 1
-        zd = 1
+        #Standing on (10,10,10) - stabilization
+        xd = 10
+        yd = 10
+        zd = 10
 
     if traj_val == 2:
         #line trajectory
-        xd = 0
-        yd = t
-        zd = t
+        xd = 1
+        yd = t + 1  
+        zd = t + 1
 
 
     pbad = MAT([[xd,yd,zd]]).T
@@ -262,7 +268,7 @@ def external_forces(t,Rba,gamma):
     gammab_wind = MAT([[0,1,0,0,0,0]]).T  # There is a wind forces on y-axis
     
     Rab = Rba.T
-    ## write your code here
+    
     # gravity
     Fbg =  MAT([
         [0],
@@ -313,8 +319,6 @@ def flying_robot(t,xi_array):
     vaa = MAT([u,v,w])
     omaa = MAT([p,q,r])
     
-    
-    ## write your code here
     # obtain trajectory
     traj = trajectory(t)
     # calculate control signal
@@ -337,7 +341,7 @@ def tree_dim_plot(x,y,z,xd,yd,zd):
         # desired position in 3 dimmensions
         ax = plt.axes(projection="3d")
         # actual position in 3 dimmensions
-        ax.scatter(1, 1.05, 0.94,label ="Desired Point that Robot Should Reach") # Data for three-dimensional 
+        ax.scatter(10, 10, 10,label ="Desired Point that Robot Should Reach") # Data for three-dimensional 
         ax.plot3D(x, y, z, "red",label = "Actual Trajectory of Flying Object") # Data for three-dimensional
         ax.legend()
         ax.set_xlabel('X Position [m]')
@@ -364,13 +368,13 @@ def two_dim_plot(x,y,z,xd,yd,zd):
         ncols = 1
         fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
         axs[0].plot(x, y,random.choice(color_list),label='X-Y Actual')
-        axs[0].scatter(1, 1.05,label="Desired Point")
+        axs[0].scatter(10, 10,label="Desired Point")
         axs[0].legend(loc='best')
         axs[1].plot(y,z,random.choice(color_list),label='Y-Z Actual')
-        axs[1].scatter(1, 1.05,label="Desired Point")
+        axs[1].scatter(10, 10,label="Desired Point")
         axs[1].legend(loc='best')
         axs[2].plot(x,z,random.choice(color_list),label='X-Z Actual')
-        axs[2].scatter(1, 1.05,label="Desired Point")
+        axs[2].scatter(10, 10,label="Desired Point")
         axs[2].legend(loc='best')
         fig.supxlabel('Position [m]')
         fig.supylabel('Position [m]')

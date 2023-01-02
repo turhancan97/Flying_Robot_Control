@@ -62,9 +62,13 @@ contr_ex_plot(t,res_tau,res_exF)
 def update(t):
     ax.cla()
 
-    ax.plot(x[:t], y[:t], z[:t],label = "Actual Trajectory of Flying Object")
+    ax.plot(x[:t], y[:t], z[:t],'black',label = "Actual Trajectory of Flying Object")
     ax.plot(xd[:t], yd[:t], zd[:t],label = "Desired Trajectory of Flying Object")
+    # ax.scatter(10,10,10,label = "Desired Target Point of Flying Object")
     ax.legend(fontsize=5)
+    # ax.set_xlim(-10, 15)
+    # ax.set_ylim(-10, 15)
+    # ax.set_zlim(-10, 15)
     ax.set_xlim(-5, 5)
     ax.set_ylim(-10, 10)
     ax.set_zlim(-100, 100)
@@ -75,6 +79,8 @@ def update(t):
 fig = plt.figure(dpi=150)
 ax = fig.add_subplot(projection='3d')
 
-ani = FuncAnimation(fig = fig, func = update, frames=np.shape(t)[0], interval = 100)
-
+ani = FuncAnimation(fig = fig, func = update, frames=np.shape(t)[0], interval = 100, repeat=False)
+fig.suptitle('Helix Trajectory Animation', fontsize=14)
 plt.show()
+# ani.save('../docs/images/animation_helix.mp4')
+plt.close()
